@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none; /* Firefox 64 */
+  -ms-overflow-style: none; /* Internet Explorer 11 */
+}
+
+body::-webkit-scrollbar { /** WebKit */
+  display: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.textfiel{
+  margin: 10px !important;
+}
+
+
+.flex-center{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-parent{
+  min-height: 100vh; 
+}
+.form{
+  background-color:ivory;
+  height:70vh;
+  width:45vh;
+  border-radius: 15px;
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);  
+  
+}
+
+label{
+  margin-bottom: 10px;
+}
+
+
+input{
+  outline-style: none;
+  height: 3vh;
+  min-width: 10vw;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-right: 1vh;
+  
+}
+
+.err{
+  font-size:x-small;
+  color: red;
+}
+#textfiels{
+  margin:10px;
+}
+
+
+/* .dropdown, .dropend, .dropstart, .dropup {
+  position:absolute !important;
+} */
+
+.posabsolute
+{
+  position:absolute !important;
+}
+.MuiDataGrid-main >div:first-child{
+  display: none;
+}
+
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .form{
+    width: 80vw;
+  }
+}
+
+nav{
+  min-width: 100vw;
+
+}
+nav ul li{
+  display: inline;
+  float: right;
+}
