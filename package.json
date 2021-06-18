@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "process.exit(1)",
+    "build": "exit()",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
