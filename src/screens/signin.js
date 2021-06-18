@@ -33,7 +33,7 @@ export default function Signin() {
     var usrnme=data.username;
     var pwd=data.password;
     //
-    console.log("window location",window.location.hostname,process.env.REACT_APP_API_URL)
+    console.log("window location",window.location.hostname,API_URL)
     await axios.post(`${API_URL}/api/signin/`,{
       "username":usrnme,
       "password":pwd
