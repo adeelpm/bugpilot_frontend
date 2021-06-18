@@ -16,7 +16,7 @@
     "@testing-library/user-event": "^12.6.0",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^8.6.0",
     "env": "0.0.2",
     "firebase": "^8.2.9",
     "material-auto-rotating-carousel": "^3.0.2",

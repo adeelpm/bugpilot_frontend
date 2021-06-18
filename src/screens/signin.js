@@ -7,9 +7,9 @@ import TextField from '@material-ui/core/TextField';
 import { Button } from '@material-ui/core';
 
 
-// require('dotenv').config();
 
 let cookies = new Cookies();
+const API_URL=process.env.REACT_APP_API_URL
 
 export default function Signin() {
    const [data,setdata]=useState({})
@@ -32,8 +32,8 @@ export default function Signin() {
     var usrnme=data.username;
     var pwd=data.password;
     //
-    console.log("window location",window.location.hostname,process.env.API_URL)
-    await axios.post(`http://${window.location.hostname}:5000/api/signin/`,{
+    console.log("window location",window.location.hostname,process.env.REACT_APP_API_URL)
+    await axios.post(`${API_URL}/api/signin/`,{
       "username":usrnme,
       "password":pwd
   

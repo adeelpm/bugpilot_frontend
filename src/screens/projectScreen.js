@@ -15,6 +15,7 @@ import EditIcon from '@material-ui/icons/Edit';
 // import Navbar from '../components/navbar'
 
 const cookies = new Cookies()
+const API_URL=process.env.REACT_APP_API_URL
 
 
 export class ProjectScreen extends Component {
@@ -41,7 +42,7 @@ export class ProjectScreen extends Component {
 
         let uid = cookies.get('uid')
 
-        const uri = `http://${window.location.hostname}:5000/api/project/${uid}`
+        const uri = `${API_URL}/api/project/${uid}`
         await axios.get(uri, headers).then(
             (res) => {
                 console.log("resdata", res)
@@ -98,7 +99,7 @@ export class ProjectScreen extends Component {
         // this.setState({projectmembers:iid})
         const uniquearray=Array.from(new Set(iid))
 
-        const uri = `http://${window.location.hostname}:5000/api/project/${uid}`
+        const uri = `${API_URL}/api/project/${uid}`
 
         axios.post(uri,{pname:this.state.projectName,pdescription:this.state.projectDescription,pmembers:uniquearray},headers).then(
             (res)=>{console.log("createproject res",res);
@@ -120,7 +121,7 @@ export class ProjectScreen extends Component {
         console.log("getprops",props)
         if(props){
 
-        const uri = `http://${window.location.hostname}:5000/api/project/projectmembers/${props}`
+        const uri = `${API_URL}/api/project/projectmembers/${props}`
 
         axios.get(uri,headers).then(
             res=>{
@@ -130,7 +131,7 @@ export class ProjectScreen extends Component {
     }
     deleteProject(){
         const pid =this.state.projectId
-        const uri = `http://${window.location.hostname}:5000/api/project/${pid}`
+        const uri = `${API_URL}/api/project/${pid}`
 
         axios.delete(uri,headers).then(
             res=>{console.log(res)
@@ -143,7 +144,7 @@ export class ProjectScreen extends Component {
     }
     updateProject(){
         const pid=this.state.projectId
-        const uri = `http://${window.location.hostname}:5000/api/project/edit/${pid}`
+        const uri = `${API_URL}/api/project/edit/${pid}`
         let uid = cookies.get('uid')
 
 

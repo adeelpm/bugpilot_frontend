@@ -16,7 +16,7 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 
 const cookies = new Cookies()
-
+const API_URL=process.env.REACT_APP_API_URL
 
 
 
@@ -51,7 +51,7 @@ class BugScreen extends Component {
 
   getbug = async () => {
     console.log('getting bug')
-    const uri = `http://${window.location.hostname}:5000/api/bug/${this.state.pid}`
+    const uri = `${API_URL}/api/bug/${this.state.pid}`
     await axios.get(uri, headers).then(
       (res) => {
         this.setState({
@@ -131,7 +131,7 @@ class BugScreen extends Component {
     const project_id=this.state.pid
     console.log("before post",this.state.fileurl);
 
-    const uri = `http://${window.location.hostname}:5000/api/bug`
+    const uri = `${API_URL}/api/bug`
     const fileLessData={title,description,assigned_to,assigned_by,project_id,fileurl:null}
     const data={fileurl:this.state.fileurl}
     
@@ -155,7 +155,7 @@ class BugScreen extends Component {
     if(this.state.users.length<=0){
       console.log('dfasf')
 
-      const uri = `http://${window.location.hostname}:5000/api/user/getmembers/${this.state.pid}`
+      const uri = `${API_URL}/api/user/getmembers/${this.state.pid}`
       
       await axios.get(uri,headers).then(
         (res)=>{

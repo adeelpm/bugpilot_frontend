@@ -251,7 +251,7 @@ const { red} = require('@material-ui/core/colors');
 
 
 
-
+const API_URL=process.env.REACT_APP_API_URL
 
 export default function Tablee(props) {
   const [sta, setSta] = useState({})
@@ -314,7 +314,7 @@ export default function Tablee(props) {
 
 
     const dropdownhalder = async (id, status) => {
-      const uri = `http://localhost:5000/api/bug/${id}`
+      const uri = `${API_URL}/api/bug/${id}`
       // console.log(uri)
       await axios.put(uri, { status: status }, headers).then(
         (res) => { props.refresh() }
@@ -398,7 +398,7 @@ export default function Tablee(props) {
       // const fileurl=null
       const fileurl=sta.bugFileUrl
       console.log("edit bug  before post",sta.bugFileUrl,fileurl)
-      const uri = `http://localhost:5000/api/bug/update/${bid}`
+      const uri = `${API_URL}/api/bug/update/${bid}`
 
       
       // let data={ title, description, assigned_to ,fileurl};
@@ -443,7 +443,7 @@ export default function Tablee(props) {
 
     const handleDelete = async () => {
       const bid = sta.bid
-      const uri = `http://localhost:5000/api/bug/delete/${bid}`
+      const uri = `${API_URL}/api/bug/delete/${bid}`
       axios.delete(uri, headers).then(
         res => {
           console.log(res)
@@ -459,7 +459,7 @@ export default function Tablee(props) {
 
     const getMembers = async () => {
       if (use.length <= 0) {
-        const uri = `http://localhost:5000/api/user/getmembers/${props.pid}`
+        const uri = `${API_URL}/api/user/getmembers/${props.pid}`
         await axios.get(uri, headers).then(
           (res) => {
             console.log(res)

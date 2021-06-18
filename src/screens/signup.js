@@ -6,7 +6,7 @@ import '../index.css'
 
 
 
-
+const API_URL=process.env.REACT_APP_API_URL
 function SignUp() {
     const [data, setdata] = useState({})
     const [isError, setIsError] = useState(false)
@@ -29,7 +29,7 @@ function SignUp() {
 
 
 
-        const url = 'http://localhost:5000/api/user/adduser'
+        const url = `${API_URL}/api/user/adduser`
 
         await axios.post(url, {
             "username": data.username,
