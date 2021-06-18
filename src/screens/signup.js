@@ -4,9 +4,10 @@ import { Button } from '@material-ui/core';
 import axios from 'axios'
 import '../index.css'
 
+const {API_URL}=require('../env')
+// import API_URL =req
 
-
-const API_URL=process.env.REACT_APP_API_URL
+// const API_URL=process.env.REACT_APP_API_URL
 function SignUp() {
     const [data, setdata] = useState({})
     const [isError, setIsError] = useState(false)

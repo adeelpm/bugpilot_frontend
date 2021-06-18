@@ -15,7 +15,9 @@ import EditIcon from '@material-ui/icons/Edit';
 // import Navbar from '../components/navbar'
 
 const cookies = new Cookies()
-const API_URL=process.env.REACT_APP_API_URL
+// const API_URL=process.env.REACT_APP_API_URL
+const {API_URL}=require('../env')
+
 
 
 export class ProjectScreen extends Component {

@@ -15,6 +15,8 @@ import firebase from '../firebaseconf'
 import React, { useState } from 'react'
 import { Slide } from 'material-auto-rotating-carousel';
 import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
+const {API_URL}=require('../env')
+
 // import Cookies from 'universal-cookie';
 
 // const cookies=new Cookies()
@@ -247,11 +249,11 @@ import { AutoRotatingCarousel } from 'material-auto-rotating-carousel';
 // }
 
 // const { withStyles } = require('@material-ui/core/styles');
-const { red} = require('@material-ui/core/colors');
+// const { red} = require('@material-ui/core/colors');
 
 
 
-const API_URL=process.env.REACT_APP_API_URL
+// const API_URL=process.env.REACT_APP_API_URL
 
 export default function Tablee(props) {
   const [sta, setSta] = useState({})

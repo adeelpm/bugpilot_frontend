@@ -16,7 +16,9 @@ import "bootstrap/dist/css/bootstrap.min.css"
 
 
 const cookies = new Cookies()
-const API_URL=process.env.REACT_APP_API_URL
+// const API_URL=process.env.REACT_APP_API_URL
+const {API_URL}=require('../env')
+
 
 
 

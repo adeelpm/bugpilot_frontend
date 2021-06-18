@@ -9,7 +9,8 @@ import { Button } from '@material-ui/core';
 
 
 let cookies = new Cookies();
-const API_URL=process.env.REACT_APP_API_URL
+// const API_URL=process.env.REACT_APP_API_URL
+const {API_URL}=require('../env')
 
 export default function Signin() {
    const [data,setdata]=useState({})
