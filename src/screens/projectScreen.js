@@ -15,7 +15,6 @@ import EditIcon from '@material-ui/icons/Edit';
 // import Navbar from '../components/navbar'
 
 const cookies = new Cookies()
-// const API_URL=process.env.REACT_APP_API_URL
 const {API_URL}=require('../env')
 
 
@@ -43,11 +42,15 @@ export class ProjectScreen extends Component {
         console.log(window.location.hostname)
 
         let uid = cookies.get('uid')
+        console.log(uid)
 
         const uri = `${API_URL}/api/project/${uid}`
         await axios.get(uri, headers).then(
             (res) => {
                 console.log("resdata", res)
+                if(res.data.length==0){
+                    return console.log("No Projects")
+                }
                 let row=res.data.map((row)=>{
                     // console.log("list of project",row)
                     return({
@@ -94,6 +97,7 @@ export class ProjectScreen extends Component {
     }
 
     createProject=()=>{
+
         console.log('calling createproject')
         let uid = cookies.get('uid')
         let iid=this.state.projectmembers  
@@ -104,15 +108,18 @@ export class ProjectScreen extends Component {
         const uri = `${API_URL}/api/project/${uid}`
 
         axios.post(uri,{pname:this.state.projectName,pdescription:this.state.projectDescription,pmembers:uniquearray},headers).then(
-            (res)=>{console.log("createproject res",res);
-            if(res.data[0].affectedRows===1){
-                alert('Project added')
-                this.toggleModal()
-                this.getProject()
-      
-              }}
+
+            (res)=>{
+
+                // console.log("Create Project res",res);
+                if(res.data[0].command==="INSERT"){
+                    alert('Project Added')
+                    this.toggleModal()
+                    this.getProject()
+                }
+            }
         ).catch(
-            (rej)=>{console.log("createproject error",rej)}
+            (rej)=>{console.log("Create Project Error",rej)}
         )
 
 
@@ -121,29 +128,49 @@ export class ProjectScreen extends Component {
     
     getProjectMembers(props){
         console.log("getprops",props)
+
         if(props){
-
-        const uri = `${API_URL}/api/project/projectmembers/${props}`
-
-        axios.get(uri,headers).then(
-            res=>{
-                this.setState({searchuser:res.data})
-                console.log("resdaaa",res)}
-        )}
+            const uri = `${API_URL}/api/project/projectmembers/${props}`
+            axios.get(uri,headers).then(
+                res=>{ 
+                    this.setState({searchuser:res.data})
+                    console.log("get pro members resdata",res)
+                }
+            )
+        }
     }
+
+
+    getMembers(props){
+        console.log("get members props",props)
+        if(props){
+            const uri = `${API_URL}/api/project/members/${props}`
+            axios.get(uri,headers).then(
+                res=>{
+                    this.setState({searchuser:res.data})
+                    console.log("get all members resdata",res)
+                }
+            )
+        }
+    }
+
+
     deleteProject(){
+
         const pid =this.state.projectId
         const uri = `${API_URL}/api/project/${pid}`
 
         axios.delete(uri,headers).then(
-            res=>{console.log(res)
-            alert('Project Deleted Permanently')
-            this.toggleEditModal()
-            this.getProject()
-        }
+            res=>{
+                console.log(res)
+                alert('Project Deleted Permanently')
+                this.toggleEditModal()
+                this.getProject()
+            }
         )
 
     }
+
     updateProject(){
         const pid=this.state.projectId
         const uri = `${API_URL}/api/project/edit/${pid}`
@@ -156,8 +183,10 @@ export class ProjectScreen extends Component {
         const uniquearray=Array.from(new Set(iid))
 
         axios.put(uri,{pname:this.state.projectName,pdescription:this.state.projectDescription,pmembers:uniquearray},headers).then(
-            res=>{console.log(res)
-            alert("Project Updated")}
+            res=>{
+                console.log(res)
+                alert("Project Updated")
+            }
         )
 
 
@@ -209,7 +238,7 @@ export class ProjectScreen extends Component {
                                     renderInput={(params) => (
                                     <TextField
                                     {...params}
-                                    onChange={(e)=>{this.getProjectMembers(e.target.value)}}
+                                    onChange={(e)=>{this.getMembers(e.target.value)}}
                                     variant="outlined"
                                     // label="filterSelectedOptions"
                                     // placeholder="Favorites"
@@ -258,7 +287,7 @@ export class ProjectScreen extends Component {
                                     renderInput={(params) => (
                                     <TextField
                                     {...params}
-                                    onChange={(e)=>{this.getProjectMembers(e.target.value)}}
+                                    onChange={(e)=>{this.getMembers(e.target.value)}}
                                     variant="outlined"
                                     // label="filterSelectedOptions"
                                     // placeholder="Favorites"

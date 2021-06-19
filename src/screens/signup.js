@@ -38,14 +38,14 @@ function SignUp() {
             "password": data.password,
 
         }).then((res) => {
-            // console.log('then res',res)
-            if(res.data.affectedRows===1){
+            console.log('then res',res)
+            if(res.data.command==='INSERT' && res.data.rowCount===1){
                 temp={...errordata}
                 temp.res="User Created"
                 setErrorData(temp)
                 // console.log("after SetErrorData",errordata.res)
             }
-            else if(res.data.error_code===1062)
+            else if(res.data.error_code==="23505")
             {
                 // console.log("else if",res.data.error_message)
                 temp={...errordata}

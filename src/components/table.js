@@ -411,9 +411,10 @@ export default function Tablee(props) {
       await axios.put(uri,{title, description, assigned_to ,fileurl}, headers).then(
         (res) => {
           console.log("res", res)
-          if (res.data.data.affectedRows === 1) {
+          if (res.data.data.rowCount === 1) {
             alert('Bug updated')
             setSta(false)
+            seteditModal(false)
             props.refresh()
 
           }
@@ -429,7 +430,8 @@ export default function Tablee(props) {
 
     const dropdown = (row) => {
       return (
-        <Dropdown className="posabsolute" onSelect={(key, e) => { dropdownhalder(row.id, e.target.innerText) }}>
+        // className="posabsolute"
+        <Dropdown  onSelect={(key, e) => { dropdownhalder(row.id, e.target.innerText) }}>
           <Dropdown.Toggle variant="success" id="dropdown-basic" disabled={!(uname === row.assigned_to || uname === row.assigned_by)}>
             {row.status}
           </Dropdown.Toggle>
@@ -449,7 +451,7 @@ export default function Tablee(props) {
       axios.delete(uri, headers).then(
         res => {
           console.log(res)
-          if (res.data.data.affectedRows === 1) {
+          if (res.data.data.rowCount === 1) {
             alert('Bug Deleted Permanently')
             props.refresh()
             seteditModal(false)
@@ -461,7 +463,7 @@ export default function Tablee(props) {
 
     const getMembers = async () => {
       if (use.length <= 0) {
-        const uri = `${API_URL}/api/user/getmembers/${props.pid}`
+        const uri = `${API_URL}/api/user/projectmembers/${props.pid}`
         await axios.get(uri, headers).then(
           (res) => {
             console.log(res)
@@ -521,7 +523,7 @@ export default function Tablee(props) {
           <Modal.Footer>
             <Button variant="success" onClick={() => { handleDelete() }}> Delete</Button>
             <Button onClick={() => { seteditModal(false); }}>Close</Button>
-            <Button onClick={() => { handleEditBug(); seteditModal(false) }}>Assign</Button>
+            <Button onClick={() => { handleEditBug();  }}>Assign</Button>
           </Modal.Footer>
         </Modal>
 

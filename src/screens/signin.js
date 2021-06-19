@@ -40,11 +40,12 @@ export default function Signin() {
   
     }).then(
       (res)=>{
+        console.log(res)
         const {message,error}=res.data
         if(message || error) {setError(message || error)}
   
         if(res.data.status){
-        // console.log("sign res",res)
+        console.log("sign res",res)
         // console.log("sign res",res.data.qrdata[0].username)
         cookies.set('uid',res.data.qrdata[0].id,{path:'/',sameSite:true,secure:false})
         cookies.set('username',res.data.qrdata[0].username,{path:'/',sameSite:true,secure:false})

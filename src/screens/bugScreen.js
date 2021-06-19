@@ -52,16 +52,17 @@ class BugScreen extends Component {
 
 
   getbug = async () => {
-    console.log('getting bug')
+    console.log('Getting bug')
     const uri = `${API_URL}/api/bug/${this.state.pid}`
     await axios.get(uri, headers).then(
       (res) => {
+        console.log("GetBug Res",res)
         this.setState({
           data: res.data,
         },()=>{
-        console.log("res",this.state.data)
-
-        })
+          console.log("Get Bug res",this.state.data)
+        }
+        )
       }
     )
 
@@ -140,7 +141,7 @@ class BugScreen extends Component {
       await axios.post(uri,{title,description,assigned_to,assigned_by,project_id,fileurl:'NULL'},headers).then(
         (res)=>{
           console.log(res)
-          if(res.data.affectedRows===1){
+          if(res.data.command==="INSERT" && res.data.rowCount===1){
             alert('Bug added')
             this.MyVerticallyCenteredModal()
             this.getbug()
@@ -152,12 +153,12 @@ class BugScreen extends Component {
 
 
   
-  getMembers=async()=>{
-    console.log(this.state.users.length) 
+  getProjectMembers=async()=>{
+    // console.log(this.state.users.length) 
     if(this.state.users.length<=0){
-      console.log('dfasf')
+      console.log('Get Members')
 
-      const uri = `${API_URL}/api/user/getmembers/${this.state.pid}`
+      const uri = `${API_URL}/api/user/projectmembers/${this.state.pid}`
       
       await axios.get(uri,headers).then(
         (res)=>{
@@ -203,7 +204,7 @@ class BugScreen extends Component {
                 <Dropdown.Toggle>
                    {this.state.bugAssignto?this.state.bugAssignto:'Assign to'}
                 </Dropdown.Toggle>
-                <Dropdown.Menu  onSelect>{
+                <Dropdown.Menu  >{
                   this.state.users.map(element => (
                     <Dropdown.Item eventKey={element.id} >{element.username}
                     </Dropdown.Item> ))
@@ -237,11 +238,11 @@ class BugScreen extends Component {
         
           <h1>{this.state.pname}</h1>
 
-          <Button variant="outline-primary" onClick={() => { this.MyVerticallyCenteredModal();this.getMembers();console.log(this.state.users) }} >Add Bug/Issue</Button>
+          <Button variant="outline-primary" onClick={() => { this.MyVerticallyCenteredModal();this.getProjectMembers()}} >Add Bug/Issue</Button>
 
           <div className="tabl">
             {
-           <Tablee datas={this.state.data} pid={this.state.pid} pname={this.state.pname} uname={cookies.get('username')} refresh={this.getbug} getmem={this.getMembers} />
+           <Tablee datas={this.state.data} pid={this.state.pid} pname={this.state.pname} uname={cookies.get('username')} refresh={this.getbug} getmem={this.getProjectMembers} />
             }
           </div>
 
